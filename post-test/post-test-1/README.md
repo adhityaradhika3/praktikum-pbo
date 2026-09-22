@@ -7,18 +7,7 @@ Posttest 1 - Mata Kuliah Pemrograman Berorientasi Objek (PBO)
 Program ini mensimulasikan proses pemesanan makanan/minuman di kantin
 Fakultas Teknik secara sederhana: pengelolaan **menu**, pendaftaran
 **pelanggan**, pembuatan **pesanan**, hingga **pembayaran**. Seluruh
-program ditulis dengan pendekatan Object-Oriented Programming (OOP)
-sesuai materi yang sudah dipelajari:
-
-- **Modul 1** — Class & Object
-- **Modul 2** — Atribut (instance & kelas) dan Method (instance, class, static)
-- **Modul 3** — Encapsulation (public, private, getter/setter dengan `@property`)
-
-> Program **tidak** menggunakan *inheritance* maupun *polymorphism* karena
-> kedua materi tersebut belum dibahas pada modul praktikum. Keempat class
-> di program ini berdiri sendiri, tetapi saling berinteraksi lewat objek
-> (composition) — misalnya `Pesanan` menyimpan objek `Pelanggan` dan
-> `Menu`, sedangkan `Pembayaran` menyimpan objek `Pesanan`.
+program ditulis dengan pendekatan Object-Oriented Programming (OOP).
 
 ## Struktur Class
 
@@ -76,10 +65,8 @@ Merepresentasikan transaksi pembayaran atas sebuah `Pesanan`.
 
 ## Cara Menjalankan
 
-Pastikan Python 3 terpasang, lalu jalankan:
-
 ```bash
-python3 main.py
+python 25091060130-RadhikaAdityaArifin-PT-1.py
 ```
 
 Semua demonstrasi (pembuatan objek, pemanggilan method, dan pengujian
@@ -111,13 +98,3 @@ berikut secara berurutan:
 6. **Statistik akhir** — menampilkan atribut kelas `total_menu`,
    `total_pelanggan`, `total_pesanan`, dan `total_pembayaran` untuk
    membuktikan atribut kelas terbagi ke seluruh objek.
-
-## Pemenuhan Ketentuan Posttest
-
-- [x] 4 class utama (Menu, Pelanggan, Pesanan, Pembayaran), tanpa inheritance, saling berinteraksi lewat objek
-- [x] Minimal 3 atribut kelas per class
-- [x] Atribut instance lewat `__init__` dan `self`
-- [x] Ada atribut public dan minimal 1 atribut private (`__nama`) di tiap class
-- [x] Instance method, class method (`@classmethod`), static method (`@staticmethod`) di tiap class
-- [x] Getter `@property` dan setter `@<nama>.setter` dengan nama fungsi sama persis, disertai validasi (`raise ValueError`)
-- [x] Main code membuat minimal 2 objek tiap class, memanggil semua jenis method, dan menguji setter dengan data valid & tidak valid
