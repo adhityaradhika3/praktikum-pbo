@@ -123,84 +123,6 @@ Melayani pembayaran pesanan (asosiasi).
 | Atribut instance | `nama`, `shift` | Tidak ada atribut `pesanan` |
 | Method | `layani_pembayaran(pesanan, metode)` | `Pesanan` diterima lewat parameter |
 
-## Diagram UML
-
-```mermaid
-classDiagram
-    class Menu {
-        +kode_menu : str
-        +nama : str
-        +kategori : str
-        #_harga : int
-        -__stok : int
-        +tambah_stok(jumlah) void
-        +kurangi_stok(jumlah) bool
-        +hitung_harga_jual() int
-        +tampilkan_info() void
-    }
-    class Makanan {
-        +porsi : str
-        +hitung_harga_jual() int
-        +tampilkan_info() void
-    }
-    class Minuman {
-        +ukuran : str
-        +hitung_harga_jual() int
-        +tampilkan_info() void
-    }
-    class Kantin {
-        +nama : str
-        +lokasi : str
-        #_daftar_menu : list
-        +tambah_menu(menu) void
-        +hapus_menu(kode_menu) void
-        +cari_menu(kode_menu) Menu
-    }
-    class Pelanggan {
-        +id_pelanggan : str
-        +nama : str
-        +is_member : bool
-        -__saldo : int
-    }
-    class ItemPesanan {
-        +menu : Menu
-        +jumlah : int
-        +hitung_subtotal() int
-    }
-    class Pesanan {
-        +id_pesanan : str
-        +pelanggan : Pelanggan
-        +daftar_item : list
-        -__status : str
-        +tambah_item(menu, jumlah) void
-        +hitung_total() float
-    }
-    class Pembayaran {
-        +id_pembayaran : str
-        +pesanan : Pesanan
-        +metode : str
-        -__jumlah_bayar : float
-        +proses_pembayaran() void
-    }
-    class Kasir {
-        +nama : str
-        +shift : str
-        +layani_pembayaran(pesanan, metode) Pembayaran
-    }
-
-    Menu <|-- Makanan : mewarisi
-    Menu <|-- Minuman : mewarisi
-    Kantin "1" o-- "*" Menu : memiliki
-    Pesanan "1" *-- "1..*" ItemPesanan : terdiri dari
-    ItemPesanan --> Menu : merujuk
-    Pesanan --> Pelanggan : milik
-    Pembayaran --> Pesanan : membayar
-    Kasir ..> Pesanan : menggunakan
-```
-
-Notasi mengikuti modul: panah putus-putus untuk asosiasi, wajik kosong
-untuk agregasi, wajik penuh untuk komposisi, dan segitiga kosong menuju
-superclass untuk pewarisan.
 
 ## Penerapan Relasi UML
 
@@ -215,13 +137,6 @@ superclass untuk pewarisan.
 dan memproses `Pembayaran`, lalu dilepas. `Kasir` tidak menyimpan
 `Pesanan` sebagai atribut, sehingga keduanya hidup mandiri.
 
-```python
-class Kasir:
-    def layani_pembayaran(self, pesanan, metode):
-        pembayaran = Pembayaran.dari_pesanan(pesanan, metode)
-        pembayaran.proses_pembayaran()
-        ...
-```
 
 ### Agregasi: `Kantin` memiliki `Menu`
 Objek `Menu` (juga `Makanan`/`Minuman`) dibuat di luar `Kantin`, lalu
@@ -229,22 +144,12 @@ didaftarkan ke list `_daftar_menu`. Saat menu dikeluarkan dengan
 `hapus_menu()` atau `Kantin` dihapus dengan `del`, objek `Menu` tetap ada
 di memori. Hal ini dibuktikan pada bagian pengujian.
 
-```python
-kantin = Kantin("Kantin Fakultas Teknik", "Gedung Fakultas Teknik")
-kantin.tambah_menu(nasi_goreng)   # Menu dibuat di luar
-del kantin                        # nasi_goreng tetap ada
-```
 
 ### Komposisi: `Pesanan` terdiri dari `ItemPesanan`
 `ItemPesanan` dibuat langsung di dalam `Pesanan.tambah_item()` dan tidak
 punya arti tanpa pesanannya. Jika `Pesanan` dihapus, seluruh `ItemPesanan`
 di dalamnya ikut musnah, sedangkan objek `Menu` yang dirujuk tetap ada.
 
-```python
-def tambah_item(self, menu, jumlah):
-    if menu.kurangi_stok(jumlah):
-        self.daftar_item.append(ItemPesanan(menu, jumlah))
-```
 
 ## Penerapan Inheritance
 
@@ -269,17 +174,6 @@ def tambah_item(self, menu, jumlah):
 | Protected | `_harga` pada `Menu`, dipakai langsung oleh `hitung_harga_jual()` di subclass |
 | Private | `__stok` pada `Menu`, tidak bisa diakses langsung dari luar maupun subclass. Subclass memakai property `stok` yang diwariskan |
 
-```python
-class Makanan(Menu):
-    def __init__(self, nama, harga, stok, porsi="Reguler"):
-        super().__init__(nama, harga, stok, "Makanan")
-        self.porsi = porsi
-
-    def hitung_harga_jual(self):                       # method overriding
-        if self.porsi == "Jumbo":
-            return self._harga + Makanan.tambahan_jumbo   # protected diakses langsung
-        return self._harga
-```
 
 Karena `Pesanan.hitung_total()` dan `ItemPesanan.hitung_subtotal()`
 memakai `hitung_harga_jual()`, total pesanan otomatis mengikuti harga
@@ -299,8 +193,6 @@ setter) akan langsung tercetak di terminal, tidak perlu input manual.
 Bagian `if __name__ == "__main__":` pada file program menjalankan
 pengujian berikut secara berurutan.
 
-### Bagian Posttest 1 (tetap dipertahankan)
-
 1. **Objek Menu** — membuat 2 objek (`Nasi Goreng` via konstruktor biasa,
    `Es Teh Manis` via factory method `dari_dict()`), lalu memanggil
    instance method (`tambah_stok`) dan static method (`validasi_kategori`).
@@ -319,9 +211,6 @@ pengujian berikut secara berurutan.
    `status`, `jumlah_bayar`) diisi dengan nilai valid (berhasil) lalu
    nilai tidak valid (memicu `ValueError` yang ditangkap dengan
    `try-except` dan dicetak sebagai pesan peringatan).
-
-### Bagian Posttest 2
-
 6. **Inheritance** — membuat 2 objek `Makanan` (`Ayam Geprek` porsi Jumbo
    via konstruktor, `Mie Goreng` via `dari_dict()`) dan 2 objek `Minuman`
    (`Es Jeruk` ukuran Besar via konstruktor, `Kopi Hitam` via
@@ -363,14 +252,3 @@ pengujian berikut secara berurutan.
 13. **Statistik akhir** — menampilkan atribut kelas `total_menu`,
     `total_pelanggan`, `total_pesanan`, dan `total_pembayaran`.
     Hasil yang diharapkan: 6 menu, 4 pelanggan, 5 pesanan, 5 pembayaran.
-
-## Pemenuhan Ketentuan Posttest 2
-
-- [x] Relasi UML: asosiasi (`Kasir` - `Pesanan`), agregasi (`Kantin` - `Menu`), komposisi (`Pesanan` - `ItemPesanan`)
-- [x] Minimal 1 superclass dan 2 subclass (`Menu` → `Makanan`, `Minuman`)
-- [x] Subclass memanggil konstruktor superclass dengan `super().__init__(...)`
-- [x] Setiap subclass punya atribut unik (`Makanan.porsi`, `Minuman.ukuran`)
-- [x] Method superclass di-override pada subclass (`hitung_harga_jual()`, `tampilkan_info()`, `dari_dict()`)
-- [x] Atribut protected (`_harga`) pada superclass untuk data yang dipakai subclass
-- [x] Atribut private (`__stok`) pada superclass untuk data eksklusif
-- [x] Seluruh fitur Posttest 1 tetap ada dan berjalan
