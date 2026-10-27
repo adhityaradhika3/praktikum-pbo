@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="670" viewBox="0 0 1100 670" role="img" aria-labelledby="title desc">
+  <title id="title">Class Diagram Sistem Pemesanan Kantin</title>
+  <desc id="desc">Diagram relasi asosiasi Kasir dengan Pesanan, agregasi Kantin dengan Menu, komposisi Pesanan dengan ItemPesanan, serta inheritance Menu dengan Makanan dan Minuman.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10" fill="none" stroke="#475569" stroke-width="1.5"/></marker>
+    <style>
+      .box{fill:#fff;stroke:#334155;stroke-width:2;rx:10}.head{fill:#e0f2fe}.title{font:700 18px Arial;fill:#0f172a}.text{font:14px Arial;fill:#334155}.rel{stroke:#475569;stroke-width:2;fill:none}.note{font:13px Arial;fill:#475569}
+    </style>
+  </defs>
+  <rect width="1100" height="670" fill="#f8fafc"/>
+  <text x="550" y="38" text-anchor="middle" class="title" font-size="24">Class Diagram — Sistem Pemesanan Kantin</text>
+  <!-- Menu hierarchy -->
+  <rect class="box head" x="420" y="75" width="260" height="135"/>
+  <text class="title" x="550" y="104" text-anchor="middle">&lt;&lt;abstract&gt;&gt; Menu</text>
+  <line x1="420" y1="116" x2="680" y2="116" stroke="#334155"/>
+  <text class="text" x="438" y="141">_harga, __stok</text><text class="text" x="438" y="166">hitung_harga_jual()</text><text class="text" x="438" y="190">detail(), tampilkan_info()</text>
+  <rect class="box" x="270" y="290" width="230" height="115"/>
+  <text class="title" x="385" y="320" text-anchor="middle">Makanan</text><line x1="270" y1="333" x2="500" y2="333" stroke="#334155"/>
+  <text class="text" x="288" y="358">porsi</text><text class="text" x="288" y="383">hitung_harga_jual(), detail()</text>
+  <rect class="box" x="580" y="290" width="220" height="115"/>
+  <text class="title" x="690" y="320" text-anchor="middle">Minuman</text><line x1="580" y1="333" x2="800" y2="333" stroke="#334155"/>
+  <text class="text" x="598" y="358">ukuran</text><text class="text" x="598" y="383">hitung_harga_jual(), detail()</text>
+  <path d="M385 290 L385 245 L550 245 L550 210" class="rel" marker-end="url(#arrow)"/><path d="M690 290 L690 245 L550 245" class="rel"/>
+  <text class="note" x="550" y="233" text-anchor="middle">inheritance</text>
+  <!-- Kantin aggregation -->
+  <rect class="box head" x="40" y="500" width="245" height="115"/><text class="title" x="162" y="532" text-anchor="middle">Kantin</text>
+  <line x1="40" y1="545" x2="285" y2="545" stroke="#334155"/><text class="text" x="58" y="570">nama, _daftar_menu</text><text class="text" x="58" y="595">tambah_menu(), tampilkan_menu()</text>
+  <path d="M300 557 L365 557 L365 432 L458 432 L458 405" class="rel"/>
+  <path d="M285 548 L300 557 L285 566 Z" fill="#fff" stroke="#475569" stroke-width="2"/>
+  <text class="note" x="330" y="544" text-anchor="middle">agregasi</text>
+  <!-- Association cashier/order -->
+  <rect class="box" x="400" y="500" width="250" height="115"/><text class="title" x="525" y="532" text-anchor="middle">Kasir</text><line x1="400" y1="545" x2="650" y2="545" stroke="#334155"/><text class="text" x="418" y="575">nama</text><text class="text" x="418" y="598">layani(pesanan)</text>
+  <rect class="box" x="790" y="500" width="260" height="115"/><text class="title" x="920" y="532" text-anchor="middle">Pesanan</text><line x1="790" y1="545" x2="1050" y2="545" stroke="#334155"/><text class="text" x="808" y="575">pelanggan, daftar_item</text><text class="text" x="808" y="598">tambah_item(), hitung_total()</text>
+  <line x1="650" y1="557" x2="790" y2="557" class="rel"/><text class="note" x="720" y="542" text-anchor="middle">asosiasi</text>
+  <!-- Composition -->
+  <rect class="box" x="850" y="290" width="230" height="115"/><text class="title" x="965" y="320" text-anchor="middle">ItemPesanan</text><line x1="850" y1="333" x2="1080" y2="333" stroke="#334155"/><text class="text" x="868" y="358">menu, jumlah</text><text class="text" x="868" y="383">hitung_subtotal()</text>
+  <path d="M965 405 L965 465 L920 465 L920 485" class="rel"/><path d="M911 485 L920 500 L929 485 Z" fill="#334155" stroke="#334155" stroke-width="2"/>
+  <text class="note" x="974" y="456">komposisi</text>
+</svg>

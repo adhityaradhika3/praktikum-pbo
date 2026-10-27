@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="530" viewBox="0 0 1100 530" role="img" aria-labelledby="title">
+  <title id="title">Screenshot output demo sistem pemesanan kantin</title>
+  <rect width="1100" height="530" rx="14" fill="#111827"/>
+  <rect width="1100" height="38" rx="14" fill="#1f2937"/><circle cx="22" cy="19" r="6" fill="#f87171"/><circle cx="44" cy="19" r="6" fill="#fbbf24"/><circle cx="66" cy="19" r="6" fill="#34d399"/>
+  <text x="90" y="24" font-family="Arial" font-size="14" fill="#cbd5e1">Output program — Posttest 3</text>
+  <g font-family="Consolas, monospace" font-size="15" fill="#e5e7eb">
+    <text x="24" y="68">=== SISTEM PEMESANAN KANTIN ===</text>
+    <text x="24" y="94" fill="#86efac">Bukti abstraksi: Menu tidak dapat diinstansiasi (Can't instantiate abstract class Menu without</text>
+    <text x="24" y="116" fill="#86efac">an implementation for abstract methods 'detail', 'hitung_harga_jual')</text>
+    <text x="24" y="150">Daftar menu Kantin Fakultas Teknik:</text>
+    <text x="24" y="174">Ayam Geprek | Makanan, porsi Jumbo | Rp23,000 | stok 5</text>
+    <text x="24" y="198">Mie Goreng | Makanan, porsi Reguler | Rp12,000 | stok 8</text>
+    <text x="24" y="222">Es Jeruk | Minuman, ukuran Besar | Rp10,000 | stok 10</text>
+    <text x="24" y="246">Kopi Hitam | Minuman, ukuran Reguler | Rp6,000 | stok 10</text>
+    <text x="24" y="280">Harga jual (method yang dioverride):</text>
+    <text x="24" y="304">Ayam Geprek: Rp23,000   Mie Goreng: Rp12,000   Es Jeruk: Rp10,000   Kopi Hitam: Rp6,000</text>
+    <text x="24" y="338">Kasir Dina melayani pesanan.</text>
+    <text x="24" y="362">Pesanan untuk Radhika: 1x Ayam Geprek = Rp23,000; 2x Es Jeruk = Rp20,000</text>
+    <text x="24" y="386" fill="#86efac">Total: Rp38,700</text>
+    <text x="24" y="420">Demo duck typing: Email: Pesanan siap diambil | Layar kasir: Pesanan siap diambil</text>
+    <text x="24" y="454">Representasi menu: Ayam Geprek (Rp23,000)</text>
+    <text x="24" y="478">Kopi Hitam lebih murah dari Es Jeruk: True</text>
+  </g>
+</svg>
